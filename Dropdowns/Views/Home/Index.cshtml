@@ -1,0 +1,6 @@
+﻿@model Dropdowns.Models.SignUpModel
+@{
+    ViewBag.Title = "Sign up";
+}
+
+@Html.DropDownListFor(m => m.State, Model.States, "- Please select a state -")
