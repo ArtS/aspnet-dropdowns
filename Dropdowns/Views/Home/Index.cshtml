@@ -3,15 +3,16 @@
     ViewBag.Title = "Sign up";
 }
 
-<h1>Sign up</h1>
-
 <div class="row">
-    <div class="col-sm-4">
+    <div class="col-sm-4 col-sm-offset-4">
+
+        <h1>Sign up</h1>
+
         <div class="panel panel-default">
             <div class="panel-body">
                 @using (Html.BeginForm("SignUp", "Home", FormMethod.Post, new { role = "form" }))
                 {
-
+                    
                 @* Email entry conrols *@
                 <div class="form-group">
                     @Html.LabelFor(m => m.Name)

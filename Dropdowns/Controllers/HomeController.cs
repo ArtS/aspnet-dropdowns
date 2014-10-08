@@ -9,6 +9,35 @@ namespace Dropdowns.Controllers
 {
     public class HomeController : Controller
     {
+        private IEnumerable<string> GetAllStates()
+        {
+            return new List<string>
+            {
+                "ACT",
+                "New South Wales",
+                "Northern Territories",
+                "Queensland",
+                "South Australia",                    
+                "Victoria",                    
+                "Western Australia",
+            };
+        }
+
+        private IEnumerable<SelectListItem> GetSelectListItems(IEnumerable<string> elements)
+        {
+            var selectList = new List<SelectListItem>();
+            foreach (var element in elements)
+            {
+                selectList.Add(new SelectListItem
+                {
+                    Value = element,
+                    Text = element
+                });
+            }
+
+            return selectList;
+        }
+
         public ActionResult Index()
         {
             var states = GetAllStates();
@@ -27,35 +56,18 @@ namespace Dropdowns.Controllers
             var states = GetAllStates();
             model.States = GetSelectListItems(states);
 
+            if (ModelState.IsValid)
+            {
+                Session["SignUpModel"] = model;
+                return RedirectToAction("Done");
+            }
             return View("Index", model);
         }
 
-        private IEnumerable<string> GetAllStates()
+        public ActionResult Done()
         {
-            return new List<string>
-            {
-                "ACT",
-                "New South Wales",
-                "Northern Territories",
-                "Queensland",
-                "South Australia",                    
-                "Victoria",                    
-                "Western Australia",
-            };
-        }
-
-        private IEnumerable<SelectListItem> GetSelectListItems(IEnumerable<string> elements) {
-            var result = new List<SelectListItem>();
-            foreach(var element in elements) 
-            {
-                result.Add(new SelectListItem 
-                {
-                    Value = element,
-                    Text = element
-                });
-            }
-
-            return result;
+            SignUpModel model = Session["SignUpModel"] as SignUpModel;
+            return View(model);
         }
     }
 }
