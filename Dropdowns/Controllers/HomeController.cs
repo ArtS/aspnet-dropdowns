@@ -11,7 +11,28 @@ namespace Dropdowns.Controllers
     {
         public ActionResult Index()
         {
-            var states = new List<string>
+            var states = GetAllStates();
+
+            var m = new SignUpModel
+            {
+                States = GetSelectListItems(states)
+            };
+
+            return View(m);
+        }
+
+        [HttpPost]
+        public ActionResult SignUp(SignUpModel model)
+        {
+            var states = GetAllStates();
+            model.States = GetSelectListItems(states);
+
+            return View("Index", model);
+        }
+
+        private IEnumerable<string> GetAllStates()
+        {
+            return new List<string>
             {
                 "ACT",
                 "New South Wales",
@@ -21,13 +42,6 @@ namespace Dropdowns.Controllers
                 "Victoria",                    
                 "Western Australia",
             };
-
-            var m = new SignUpModel
-            {
-                States = GetSelectListItems(states)
-            };
-
-            return View(m);
         }
 
         private IEnumerable<SelectListItem> GetSelectListItems(IEnumerable<string> elements) {
@@ -42,20 +56,6 @@ namespace Dropdowns.Controllers
             }
 
             return result;
-        }
-
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
         }
     }
 }

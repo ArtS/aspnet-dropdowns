@@ -3,4 +3,30 @@
     ViewBag.Title = "Sign up";
 }
 
-@Html.DropDownListFor(m => m.State, Model.States, "- Please select a state -")
+<h1>Sign up</h1>
+
+<div class="row">
+    <div class="col-sm-4">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                @using (Html.BeginForm("SignUp", "Home", FormMethod.Post, new { role = "form" }))
+                {
+
+                @* Email entry conrols *@
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Name)
+                    @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+                </div>
+
+                @* State selection dropdown *@
+                <div class="form-group">
+                    @Html.LabelFor(m => m.State)
+                    @Html.DropDownListFor(m => m.State, Model.States, "- Please select a state -", new { @class = "form-control" })
+                </div>
+
+                <button type="submit" class="btn btn-primary">Sign up</button>
+                }
+            </div>
+        </div>
+    </div>
+</div>
