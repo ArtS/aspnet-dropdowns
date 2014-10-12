@@ -6,20 +6,26 @@ namespace Dropdowns.Controllers
 {
     public class SignUpController : Controller
     {
+        //
+        // 1. Action method for displaying a 'Sign Up' page
+        //
         public ActionResult SignUp()
         {
-            // Let's get all states that we need for a dropdown
+            // Let's get all states that we need for a DropDownList
             var states = GetAllStates();
 
-            var m = new SignUpModel
+            var model = new SignUpModel
             {
                 // Create a list of SelectListItems so these can be rendered on the page
                 States = GetSelectListItems(states)
             };
 
-            return View(m);
+            return View(model);
         }
 
+        //
+        // 2. Action method for handling user-entered data when 'Sign Up' button is pressed.
+        //
         [HttpPost]
         public ActionResult SignUp(SignUpModel model)
         {
@@ -27,7 +33,7 @@ namespace Dropdowns.Controllers
             var states = GetAllStates();
 
             // Set these states on the model. We need to do this because
-            // only selected in the dropdown value is posted back, not the whole
+            // only selected in the DropDownList value is posted back, not the whole
             // list of states
             model.States = GetSelectListItems(states);
 
@@ -44,12 +50,20 @@ namespace Dropdowns.Controllers
             return View("SignUp", model);
         }
 
+        //
+        // 3. Action method for displaying 'Done' page
+        //
         public ActionResult Done()
         {
-            SignUpModel model = Session["SignUpModel"] as SignUpModel;
+            // Get Sign Up information from the session
+            var model = Session["SignUpModel"] as SignUpModel;
+
+            // Display Done.html page that shows Name and selected state.
             return View(model);
         }
 
+        // Just return a list of states - in a real-world application this would call
+        // into data access layer to retrieve states from a database.
         private IEnumerable<string> GetAllStates()
         {
             return new List<string>
@@ -64,9 +78,19 @@ namespace Dropdowns.Controllers
             };
         }
 
+        // This is one of the most important parts in the whole example.
+        // This function takes a list of strings and returns a list of SelectListItem objects.
+        // These objects are going to be used later in the SignUp.html template to render the
+        // DropDownList.
         private IEnumerable<SelectListItem> GetSelectListItems(IEnumerable<string> elements)
         {
+            // Create an empty list to hold result of the operation
             var selectList = new List<SelectListItem>();
+
+            // For each string in the 'elements' variable, create a new SelectListItem object
+            // that has both it's Value and Text properties set to a particular state.
+            // This will result in MVC rendering each item as:
+            //     <option value="State Name">State Name</option>
             foreach (var element in elements)
             {
                 selectList.Add(new SelectListItem
