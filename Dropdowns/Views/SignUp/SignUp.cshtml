@@ -1,7 +1,6 @@
 ﻿@model Dropdowns.Models.SignUpModel
-@{
-    ViewBag.Title = "Sign up";
-}
+
+@{ ViewBag.Title = "Sign up"; }
 
 <div class="row">
     <div class="col-sm-4 col-sm-offset-4">
@@ -10,22 +9,24 @@
 
         <div class="panel panel-default">
             <div class="panel-body">
-                @using (Html.BeginForm("SignUp", "SignUp", FormMethod.Post, new { role = "form" }))
-                {
-                    
-                @* Email entry conrols *@
-                <div class="form-group">
-                    @Html.LabelFor(m => m.Name)
-                    @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
-                </div>
+                @using (Html.BeginForm("SignUp", "SignUp", FormMethod.Post, new { role = "form" })) {
 
-                @* State selection dropdown *@
-                <div class="form-group">
-                    @Html.LabelFor(m => m.State)
-                    @Html.DropDownListFor(m => m.State, Model.States, "- Please select a state -", new { @class = "form-control" })
-                </div>
+                    @* Name textbox *@
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Name)
+                        @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+                    </div>
 
-                <button type="submit" class="btn btn-primary">Sign up</button>
+                    @* State selection dropdown *@
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.State)
+                        @Html.DropDownListFor(m => m.State, // Store selected value in Model.State
+                                              Model.States, // Take list of values from Model.States
+                                              "- Please select a state -", // Text for the first 'default' option
+                                              new { @class = "form-control" }) // A class name to assign to <select> tag
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Sign up</button>
                 }
             </div>
         </div>
