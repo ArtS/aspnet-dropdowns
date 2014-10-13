@@ -14,11 +14,10 @@ namespace Dropdowns.Controllers
             // Let's get all states that we need for a DropDownList
             var states = GetAllStates();
 
-            var model = new SignUpModel
-            {
-                // Create a list of SelectListItems so these can be rendered on the page
-                States = GetSelectListItems(states)
-            };
+            var model = new SignUpModel();
+
+            // Create a list of SelectListItems so these can be rendered on the page
+            States = GetSelectListItems(states);
 
             return View(model);
         }
