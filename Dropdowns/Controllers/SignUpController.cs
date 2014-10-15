@@ -7,7 +7,7 @@ namespace Dropdowns.Controllers
     public class SignUpController : Controller
     {
         //
-        // 1. Action method for displaying a 'Sign Up' page
+        // 1. Action method for displaying 'Sign Up' page
         //
         public ActionResult SignUp()
         {
@@ -32,7 +32,7 @@ namespace Dropdowns.Controllers
             var states = GetAllStates();
 
             // Set these states on the model. We need to do this because
-            // only selected in the DropDownList value is posted back, not the whole
+            // only the selected value from the DropDownList is posted back, not the whole
             // list of states
             model.States = GetSelectListItems(states);
 
@@ -87,7 +87,7 @@ namespace Dropdowns.Controllers
             var selectList = new List<SelectListItem>();
 
             // For each string in the 'elements' variable, create a new SelectListItem object
-            // that has both it's Value and Text properties set to a particular state.
+            // that has both its Value and Text properties set to a particular value.
             // This will result in MVC rendering each item as:
             //     <option value="State Name">State Name</option>
             foreach (var element in elements)
