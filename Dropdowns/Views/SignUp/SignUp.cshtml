@@ -20,10 +20,18 @@
                     @* State selection dropdown *@
                     <div class="form-group">
                         @Html.LabelFor(m => m.State)
-                        @Html.DropDownListFor(m => m.State, // Store selected value in Model.State
-                                              Model.States, // Take list of values from Model.States
-                                              "- Please select a state -", // Text for the first 'default' option
-                                              new { @class = "form-control" }) // A class name to assign to <select> tag
+                        @Html.DropDownListFor(m => m.State, // 1. Store selected value in Model.State;
+                                                            // when page is rendered after postback,
+                                                            // take selected value from Model.State.
+
+                                              // 2. Take list of values from Model.States
+                                              Model.States,
+
+                                              // 3. Text for the first 'default' option
+                                              "- Please select a state -",
+
+                                              //4. A class name to assign to <select> tag
+                                              new { @class = "form-control" })
                     </div>
 
                     <button type="submit" class="btn btn-primary">Sign up</button>
