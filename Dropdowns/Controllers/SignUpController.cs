@@ -11,13 +11,12 @@ namespace Dropdowns.Controllers
         //
         public ActionResult SignUp()
         {
-            // Let's get all states that we need for a DropDownList
-            var states = GetAllStates();
-
             var model = new SignUpModel();
+            
+            model.State = "ACT";
 
-            // Create a list of SelectListItems so these can be rendered on the page
-            model.States = GetSelectListItems(states);
+            // Let's get all states that we need for a DropDownList
+            model.States = GetAllStates();
 
             return View(model);
         }
@@ -29,12 +28,10 @@ namespace Dropdowns.Controllers
         public ActionResult SignUp(SignUpModel model)
         {
             // Get all states again
-            var states = GetAllStates();
-
             // Set these states on the model. We need to do this because
             // only the selected value from the DropDownList is posted back, not the whole
-            // list of states
-            model.States = GetSelectListItems(states);
+            // list of states.
+            model.States = GetAllStates();
 
             // In case everything is fine - i.e. both "Name" and "State" are entered/selected,
             // redirect user to the "Done" page, and pass the user object along via Session

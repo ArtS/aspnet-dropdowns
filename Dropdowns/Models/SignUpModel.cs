@@ -16,6 +16,6 @@ namespace Dropdowns.Models
         public string State { get; set; }
 
         // This property will hold all available states for selection
-        public IEnumerable<SelectListItem> States { get; set; }
+        public IEnumerable<string> States { get; set; }
     }
 }
