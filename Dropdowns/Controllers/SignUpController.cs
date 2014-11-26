@@ -17,7 +17,7 @@ namespace Dropdowns.Controllers
             var model = new SignUpModel();
 
             // Create a list of SelectListItems so these can be rendered on the page
-            States = GetSelectListItems(states);
+            model.States = GetSelectListItems(states);
 
             return View(model);
         }
